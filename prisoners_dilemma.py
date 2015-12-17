@@ -16,7 +16,7 @@ Aggregated results are stored in tournament.txt
 Unpublished work (c)2013 Project Lead The Way
 CSE Project 1.3.5 Collaborating on a Project
 Draft, Do Not Distribute
-Version 8/23/2013 
+Version 12/15/2015 
 '''
 
 import random
@@ -111,9 +111,15 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     # This example player always colludes
     if player == 0:
         if getting_team_name:
-            return 'loyal'
+            return 'loyal vengeful'
         else:
-            return 'c'
+            if len(opponent_history)==0: #It's the first round: collude
+                return 'c'
+            elif history[-1]=='c' and opponent_history[-1]=='b':
+                return 'b' # betray if they were severely punished last time
+            else:
+                return 'c' #otherwise collude
+        
 
     
         
@@ -148,11 +154,11 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
             return 'loyal vengeful'
         else:
             if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray if they were severely punished last time
+                return 'b'
+            elif history[-1]=='c' and opponent_history[-1]=='c':
+                return 'c' # betray if they were severely punished last time
             else:
-                return 'c' #otherwise collude
+                return 'b' #otherwise collude
 
 
     
@@ -180,11 +186,11 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
             if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
+                return 'b'
+            elif history[-1]=='c' and opponent_history[-1]=='c':
                 return 'b' # betray is they were severely punished last time
             else:
-                return 'c' #otherwise collude
+                return 'b' #otherwise collude
 
 
 
@@ -201,7 +207,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     #
     elif player == 4:
         if getting_team_name:
-            return 'betray every 3rd round'
+            return 'betray every 3actionrd round'
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
