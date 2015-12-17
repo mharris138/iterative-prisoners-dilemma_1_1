@@ -160,7 +160,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
             return 'loyal vengeful'
         else:
             if len(opponent_history)==0: #It's the first round: collude
-                return 'b'
+                return 'c'
             elif history[-1]=='c' and opponent_history[-1]=='c':
                 return 'c' # betray if they were severely punished last time
             else:
